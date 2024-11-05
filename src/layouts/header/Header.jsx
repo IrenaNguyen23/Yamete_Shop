@@ -5,8 +5,9 @@ import { GET_ALL } from '../../service/apiService';
 import { Link } from 'react-router-dom';
 import Search from '../search/Search';
 import { SearchProvider } from '../../context/SearchContext';
-import Action from '../Action/Action';
 import { CartProvider } from '../../context/CartProvider';
+import Action from '../action/Action';
+
 const Header = () => {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
