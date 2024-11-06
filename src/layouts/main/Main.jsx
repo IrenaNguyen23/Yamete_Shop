@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Banner from '../banner/Banner'
 import Category from '../category/Category'
 import ProductMinimal from '../product-minimal/ProductMinimal'
@@ -9,8 +9,18 @@ import Testimonials from '../testimonial/Testimonials'
 import CTA from '../CTA/CTA'
 import Service from '../service/Service'
 import Sidebar from '../sidebar/Sidebar'
+import { GET_ALL } from '../../service/apiService'
+import ProductCategory from '../product-category/ProductCategory'
 
 const Main = () => {
+    const [categories, setCategoies] = useState([]);
+
+    useEffect(() => {
+        GET_ALL(`categories`).then((item) => setCategoies(item.data));
+    }, [categories]);
+    const filteredCategories = categories.filter(
+        (category) => category.isHome === 1
+    );
     return (
         <>
             <main>
@@ -22,7 +32,7 @@ const Main = () => {
                 <div className="product-container">
                     <div className="container">
                         {/*    - SIDEBAR  */}
-                        <Sidebar/>
+                        <Sidebar />
                         <div className="product-box">
                             {/*      - PRODUCT MINIMAL    */}
                             <ProductMinimal />
@@ -33,6 +43,12 @@ const Main = () => {
                         </div>
                     </div>
                 </div>
+                <div className="container">
+          {filteredCategories.length > 0 &&
+            filteredCategories.map((row) => (
+              <ProductCategory categoryName={row.name} categoryId={row.id} key={row.id}/>
+            ))}
+        </div>
                 {/*- TESTIMONIALS, CTA & SERVICE    */}
                 <div>
                     <div className="container">

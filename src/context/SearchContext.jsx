@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { createContext, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GET_PAGE } from '../service/apiService';
+import { GET_PAGE, GET_SEARCH } from '../service/apiService';
 
 const SearchContext = createContext();
 
@@ -31,16 +31,14 @@ const SearchProvider = ({ children }) => {
         }
 
         try {
-            const productResponse = await axios.get(`http://localhost:8080/api/products/allproducts`);
+            const nextPage = 0; // Pagination bắt đầu từ 0
+            const productResponse = await GET_SEARCH('products', input, nextPage, 10); // Sử dụng GET_SEARCH từ apiService
+
             const products = productResponse.data;
 
-            const filteredResults = products.filter((item) =>
-                item.title?.toLowerCase().includes(input.toLowerCase())
-            );
-
-            // Cache results
-            setCache(prevCache => ({ ...prevCache, [input]: filteredResults }));
-            setSearchResults(filteredResults);
+            // Lưu vào cache để sử dụng lần sau
+            setCache(prevCache => ({ ...prevCache, [input]: products }));
+            setSearchResults(products);
         } catch (error) {
             console.error('Error during search:', error);
         }

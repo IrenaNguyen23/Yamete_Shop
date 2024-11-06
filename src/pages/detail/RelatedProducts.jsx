@@ -14,7 +14,7 @@ const RelatedProducts = ({ currentProductBrand }) => {
 
     useEffect(() => {
         const fetchRelatedProducts = async () => {
-            const response = await GET_ID(`products/brand`, currentProductBrand);
+            const response = await GET_ID(`products/category`, currentProductBrand);
             setRelatedProducts(response.data);
         };
 

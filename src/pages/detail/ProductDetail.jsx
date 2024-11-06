@@ -133,7 +133,7 @@ const ProductDetail = () => {
                 </Box>
             </section>
 
-            {product.brand && <RelatedProducts currentProductBrand={product.brand} />}
+            {product.brand && <RelatedProducts currentProductBrand={product.category.id} />}
         </div>
     );
 };

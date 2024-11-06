@@ -323,11 +323,15 @@ const Header = () => {
               <ion-icon name="menu-outline" />
             </button>
             <button className="action-btn">
+              <Link to={"/cart"}>
               <ion-icon name="bag-handle-outline" />
               <span className="count">0</span>
+              </Link>
             </button>
             <button className="action-btn">
+              <Link to={"/"}>
               <ion-icon name="home-outline" />
+              </Link>
             </button>
             <button className="action-btn">
               <ion-icon name="heart-outline" />

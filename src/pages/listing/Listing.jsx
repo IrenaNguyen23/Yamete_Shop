@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { GET_ID, GET_PAGE } from "../../service/apiService";
-import { Box, Typography, Select, MenuItem, Button, Grid, Pagination, Breadcrumbs, Card } from "@mui/material";
-import { CardBody, CardImg } from "react-bootstrap";
+import { Box, Typography, Button, Grid, Pagination, Breadcrumbs } from "@mui/material";
 
 const Listing = () => {
     const [products, setProducts] = useState([]);

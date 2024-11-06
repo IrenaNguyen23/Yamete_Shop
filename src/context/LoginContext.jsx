@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { POST_ADD } from '../service/apiService';
 const LoginContext = createContext();
 
 const LoginProvider = ({ children }) => {
@@ -25,11 +26,7 @@ const LoginProvider = ({ children }) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8080/api/users/login', formData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+            const response = await POST_ADD('users/login', formData);
             const user = response.data;
             localStorage.setItem('user', JSON.stringify(user)); // Lưu thông tin người dùng vào localStorage
             navigate("/");

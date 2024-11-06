@@ -15,6 +15,7 @@ import {
     Paper,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { POST_ADD } from "../../service/apiService";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -40,13 +41,8 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:8080/api/users/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
+            const response = await POST_ADD("users/register", formData)
+            
             if (response.status === 200) {
                 setMessage("Registration successful!");
                 alert("Registration successful!");
