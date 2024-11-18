@@ -13,6 +13,14 @@ const ProductShowcase = ({ title, products }) => {
 
   const productChunks = chunkArray(products, 4);
 
+  // Giới hạn độ dài tiêu đề, nếu quá dài, sẽ cắt bớt và thêm ba chấm
+  const truncateTitle = (title, maxLength = 30) => {
+    if (title.length > maxLength) {
+      return title.slice(0, maxLength) + '...';
+    }
+    return title;
+  };
+
   return (
     <div className="product-showcase">
       <h2 className="title">{title}</h2>
@@ -22,25 +30,27 @@ const ProductShowcase = ({ title, products }) => {
             {chunk.map((product) => (
               <div className="showcase" key={product.id}>
                 <Link to={`/detail?productId=${product.id}`}>
-                <a href="#" className="showcase-img-box">
-                  <img
-                    src={`./images/items/${product.thumbnail}`}
-                    alt={product.title}
-                    width={70}
-                    className="showcase-img"
-                  />
-                </a>
-                <div className="showcase-content">
-                  <a href="#">
-                    <h4 className="showcase-title">{product.title}</h4>
+                  <a href="#" className="showcase-img-box">
+                    <img
+                      src={`./images/items/${product.thumbnail}`} // Hình ảnh sản phẩm
+                      alt={product.title}
+                      width={70}
+                      className="showcase-img"
+                    />
                   </a>
-                  <a href="#" className="showcase-category">{product.brand || product.category}</a>
-                  <div className="price-box">
-                    <p className="price">${product.price}</p>
-                    {product.discountPrice && <del>${product.discountPrice}</del>}
+                  <div className="showcase-content">
+                    <a href="#">
+                      <h4 className="showcase-title">{truncateTitle(product.title)}</h4>
+                    </a>
+                    <a href="#" className="showcase-category">
+                      {product.brand || product.category} {/* Hiển thị thương hiệu hoặc danh mục */}
+                    </a>
+                    <div className="price-box">
+                      <p className="price">${product.price}</p>
+                      {product.discountPrice && <del>${product.discountPrice}</del>} {/* Hiển thị giá giảm nếu có */}
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
               </div>
             ))}
           </div>

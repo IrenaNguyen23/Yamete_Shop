@@ -33,19 +33,21 @@ const Action = () => {
             ) : (
                 <button className="action-btn">
                     <Link to="/login">
-                        <ion-icon name="person-outline" />
+                        <ion-icon color="secondary" name="person-outline" />
                     </Link>
                 </button>
             )}
             <button className="action-btn">
-                <ion-icon name="heart-outline" />
-                <span className="count">0</span>
+                <Link to="/cart">
+                    <ion-icon name="heart-outline" color="secondary" />
+                    <span className="count">0</span>
+                </Link>
             </button>
             <button className="action-btn">
                 <Link to="/cart">
-                    <ion-icon name="bag-handle-outline" />
+                    <ion-icon color="secondary" name="bag-handle-outline" />
+                    <span className="count">{cartItems.length}</span> {/* Sử dụng cartItems.length để lấy số lượng */}
                 </Link>
-                <span className="count">{cartItems.length}</span> {/* Sử dụng cartItems.length để lấy số lượng */}
             </button>
         </div>
     );
